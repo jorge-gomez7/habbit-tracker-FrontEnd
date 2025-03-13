@@ -39,7 +39,8 @@ habit-tracker/
 
 ### 1️⃣ Clonar el Repositorio
 ```bash
-git clone https://github.com/TU_USUARIO/habit-tracker.git
+git clone https://github.com/jorge-gomez7/habbit-tracker-FrontEnd.git
+
 cd habit-tracker/frontend
 ```
 
