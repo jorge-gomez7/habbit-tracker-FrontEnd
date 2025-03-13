@@ -62,12 +62,6 @@ npm run dev
 
 ---
 
-## 🖼️ Capturas de Pantalla  
-Aquí puedes ver una vista previa de la aplicación:
-
-![Interfaz de Habit Tracker](public/screenshot.png)
-
----
 
 ## 🎨 Estilos y Temas  
 ✨ **Tailwind CSS** se utiliza para el diseño moderno y responsivo.  
