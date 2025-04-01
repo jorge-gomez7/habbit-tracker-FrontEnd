@@ -1,16 +1,24 @@
 "use client";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import { fetchHabits } from "@/store/habitsSlice";
 import HabitCard from "./HabitCard";
 
 export default function HabitList() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { items, status, error } = useSelector((state) => state.habits);
 
   useEffect(() => {
-    dispatch(fetchHabits());
-  }, [dispatch]);
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      router.push("/"); 
+    } else {
+      dispatch(fetchHabits());
+    }
+  }, [dispatch, router]);
 
   if (status === "loading") return <p className="text-white text-center">⏳ Cargando hábitos...</p>;
   if (status === "failed") return <p className="text-red-500 text-center">⚠ Error: {error}</p>;
