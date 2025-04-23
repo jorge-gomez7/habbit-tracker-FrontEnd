@@ -7,9 +7,15 @@ export default function HabitCard({ habit }) {
   const dispatch = useDispatch();
 
   const handleComplete = async () => {
-    await axios.put(`http://localhost:3000/habits/${habit._id}`, {
-      progress: habit.progress + 1,
-    });
+    const token = localStorage.getItem("token");
+    await axios.put(`http://localhost:3000/habits/${habit._id}`, 
+      {progress: habit.progress + 1},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
     dispatch(fetchHabits());
   };
 
