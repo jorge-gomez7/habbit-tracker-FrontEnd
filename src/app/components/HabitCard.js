@@ -8,7 +8,7 @@ export default function HabitCard({ habit }) {
 
   const handleComplete = async () => {
     const token = localStorage.getItem("token");
-    await axios.put(`https://habit-tracker-production-fced.up.railway.app/habits/${habit._id}`, 
+    await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/habits/${habit._id}`, 
       {progress: habit.progress + 1},
       {
         headers: {
