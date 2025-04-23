@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/habits";
+const API_URL = "https://habit-tracker-production-fced.up.railway.app/habits";
 
 // Obtener hábitos
 export const fetchHabits = createAsyncThunk("habits/fetchHabits", async () => {
