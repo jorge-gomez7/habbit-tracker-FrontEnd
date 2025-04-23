@@ -21,7 +21,8 @@ export default function AuthPage() {
       const res = await axios.post(`http://localhost:3000/auth/${endpoint}`, form);
 
       if (tab === 'login') {
-        localStorage.setItem('userId', res.data.userId);
+        localStorage.setItem('token', res.data.token);
+        window.dispatchEvent(new Event("loginChange"));
         router.push('/habits'); // Redirige a la pantalla de hábitos
       } else {
         alert('Registro exitoso. Ahora inicia sesión.');

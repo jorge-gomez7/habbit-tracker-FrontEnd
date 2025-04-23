@@ -5,21 +5,47 @@ const API_URL = "http://localhost:3000/habits";
 
 // Obtener hábitos
 export const fetchHabits = createAsyncThunk("habits/fetchHabits", async () => {
-    const response = await axios.get(API_URL);
+    const token = localStorage.getItem('token');
+    const response = await axios.get(API_URL,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
 // Marcar como hecho (✅ Done)
 export const completeHabit = createAsyncThunk("habits/completeHabit", async (id) => {
-    const response = await axios.patch(`${API_URL}/${id}/complete`);
+    const token = localStorage.getItem('token');
+    const response = await axios.patch(`${API_URL}/${id}/complete`,{},{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return { id, ...response.data };
 });
 
 // Reiniciar hábito (🔁 Reset)
 export const resetHabit = createAsyncThunk("habits/resetHabit", async (id) => {
-    const response = await axios.patch(`${API_URL}/${id}/reset`);
+    const token = localStorage.getItem('token');
+    const response = await axios.patch(`${API_URL}/${id}/reset`,{}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return { id };
 });
+
+export const addHabit = createAsyncThunk("habits/addHabit", async (habitData) => {
+    const token = localStorage.getItem('token');
+    const response = await axios.post(API_URL, habitData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+});
+
 
 const habitsSlice = createSlice({
     name: "habits",
@@ -63,7 +89,13 @@ const habitsSlice = createSlice({
                     habit.lastCompleted = null;
                     habit.progress = 0;
                 }
+            })
+
+            .addCase(addHabit.fulfilled, (state, action) => {
+                state.items.push(action.payload); // agrega el nuevo hábito al estado
             });
+            
+            
     }
 });
 
