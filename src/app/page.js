@@ -18,7 +18,7 @@ export default function AuthPage() {
     setError('');
     try {
       const endpoint = tab === 'login' ? 'login' : 'register';
-      const res = await axios.post(`http://localhost:3000/auth/${endpoint}`, form);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/${endpoint}`, form);
 
       if (tab === 'login') {
         localStorage.setItem('token', res.data.token);
